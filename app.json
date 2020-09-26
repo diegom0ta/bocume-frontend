@@ -1,0 +1,12 @@
+{
+  "name": "bocume-frontend",
+  "displayName": "bocume-frontend",
+  "expo": {
+    "name": "bocume-frontend",
+    "slug": "bocume-frontend",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
