@@ -1,5 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	SafeAreaView,
+	Button,
+	Image
+} from 'react-native';
 
 export default function Home({ navigation }) {
 	return (
@@ -8,7 +15,10 @@ export default function Home({ navigation }) {
 				<Text style={styles.textWelcome}>Seja Bem-Vindo!</Text>
 			</View>
 			<View style={styles.logoArea}>
-				<Text>Bócumê</Text>
+				<Image
+					source={require('../assets/logo.png')}
+					style={{ width: 300, height: 100, resizeMode: 'stretch' }}
+				/>
 			</View>
 			<View style={styles.buttonArea}>
 				<Button
@@ -23,7 +33,7 @@ export default function Home({ navigation }) {
 
 const styles = StyleSheet.create({
 	container: {
-		height: 1000,
+		height: 828,
 		backgroundColor: '#7a0c0c'
 	},
 	logoArea: {

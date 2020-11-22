@@ -5,32 +5,41 @@ import {
 	SafeAreaView,
 	Text,
 	TextInput,
-	Button,
-	Image
+	Button
 } from 'react-native';
 
-export default function Login({ navigation }) {
+export default function RegisterUser() {
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.header}>
-				<Text style={styles.textLogin}>Já é nosso usuário?</Text>
+				<Text style={styles.textInfo}>Informe seus dados:</Text>
 			</View>
-			<View style={styles.logoArea}>
-				<Image
-					source={require('../assets/logo.png')}
-					style={{ width: 200, height: 66, resizeMode: 'stretch' }}
-				/>
-			</View>
-			<View style={styles.loginArea}>
+			<View style={styles.registerArea}>
+				<Text style={styles.textUser}>Nome</Text>
 				<TextInput
 					style={styles.textInput}
-					placeholder='Digite seu email'
+					placeholder='Ex. João'
 					// onChangeText={(text) => setText(text)}
 					// defaultValue={text}
 				/>
+				<Text style={styles.textUser}>Sobrenome</Text>
 				<TextInput
 					style={styles.textInput}
-					placeholder='Digite sua senha'
+					placeholder='Ex. Silva'
+					// onChangeText={(text) => setText(text)}
+					// defaultValue={text}
+				/>
+				<Text style={styles.textUser}>E-mail</Text>
+				<TextInput
+					style={styles.textInput}
+					placeholder='Ex. joaosilva@email.com'
+					// onChangeText={(text) => setText(text)}
+					// defaultValue={text}
+				/>
+				<Text style={styles.textUser}>Telefone</Text>
+				<TextInput
+					style={styles.textInput}
+					placeholder='Ex. 85 99999-0000'
 					secureTextEntry={true}
 					// onChangeText={(text) => setText(text)}
 					// defaultValue={text}
@@ -41,12 +50,7 @@ export default function Login({ navigation }) {
 					onPress={() => {
 						alert('You tapped the button!');
 					}}
-					title='Entrar'
-					color='#ffb300'
-				/>
-				<Button
-					onPress={() => navigation.navigate('RegisterUser')}
-					title='Ainda não é cliente? Cadastre-se'
+					title='Cadastrar'
 					color='#ffb300'
 				/>
 			</View>
@@ -59,15 +63,10 @@ const styles = StyleSheet.create({
 		height: 828,
 		backgroundColor: '#7a0c0c'
 	},
-	logoArea: {
-		justifyContent: 'center',
-		flex: 1,
-		flexDirection: 'row'
-	},
-	loginArea: {
+	registerArea: {
 		alignItems: 'center',
 		justifyContent: 'space-evenly',
-		flex: 4,
+		flex: 9,
 		flexDirection: 'column',
 		direction: 'rtl',
 		flexWrap: 'nowrap'
@@ -82,12 +81,16 @@ const styles = StyleSheet.create({
 	buttonArea: {
 		margin: 20,
 		justifyContent: 'center',
-		flex: 2,
-		flexDirection: 'column'
+		flex: 1,
+		flexDirection: 'row'
 	},
-	textLogin: {
+	textInfo: {
 		color: 'white',
 		fontSize: 20
+	},
+	textUser: {
+		color: 'white',
+		fontSize: 14
 	},
 	header: {
 		justifyContent: 'center',
