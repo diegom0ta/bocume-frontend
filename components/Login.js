@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	View,
 	StyleSheet,
@@ -8,8 +8,38 @@ import {
 	Button,
 	Image
 } from 'react-native';
+import api from '../api/api';
 
 export default function Login({ navigation }) {
+	const [username, setUsername] = useState({});
+	const [password, setPassword] = useState({});
+	const [dataResponse, setDataResponse] = useState({});
+
+	function authUser(username, password) {
+		api
+			.post('/users/login', {
+				username,
+				password
+			})
+			.then(function (response) {
+				setDataResponse(response);
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}
+
+	function _handleLogin() {
+		authUser(username, password);
+		if (dataResponse.success) {
+			() => navigation.navigate('Map');
+		} else {
+			() => alert('Usuário e/ou senha incorreto(s)!');
+		}
+		console.log('data', dataResponse);
+	}
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.header}>
@@ -25,25 +55,17 @@ export default function Login({ navigation }) {
 				<TextInput
 					style={styles.textInput}
 					placeholder='Digite seu email'
-					// onChangeText={(text) => setText(text)}
-					// defaultValue={text}
+					onChangeText={(un) => setUsername(un)}
 				/>
 				<TextInput
 					style={styles.textInput}
 					placeholder='Digite sua senha'
 					secureTextEntry={true}
-					// onChangeText={(text) => setText(text)}
-					// defaultValue={text}
+					onChangeText={(pwd) => setPassword(pwd)}
 				/>
 			</View>
 			<View style={styles.buttonArea}>
-				<Button
-					onPress={() => {
-						alert('You tapped the button!');
-					}}
-					title='Entrar'
-					color='#ffb300'
-				/>
+				<Button onPress={() => _handleLogin()} title='Entrar' color='#ffb300' />
 				<Button
 					onPress={() => navigation.navigate('RegisterUser')}
 					title='Ainda não é cliente? Cadastre-se'

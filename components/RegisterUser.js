@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	View,
 	StyleSheet,
@@ -9,6 +9,10 @@ import {
 } from 'react-native';
 
 export default function RegisterUser() {
+	const [firstname, setFirstname] = useState({});
+	const [lastname, setLastname] = useState({});
+	const [username, setUsername] = useState({});
+
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.header}>
@@ -19,15 +23,13 @@ export default function RegisterUser() {
 				<TextInput
 					style={styles.textInput}
 					placeholder='Ex. João'
-					// onChangeText={(text) => setText(text)}
-					// defaultValue={text}
+					onChangeText={(fn) => setFirstname(fn)}
 				/>
 				<Text style={styles.textUser}>Sobrenome</Text>
 				<TextInput
 					style={styles.textInput}
 					placeholder='Ex. Silva'
-					// onChangeText={(text) => setText(text)}
-					// defaultValue={text}
+					onChangeText={(ln) => setLastname(ln)}
 				/>
 				<Text style={styles.textUser}>E-mail</Text>
 				<TextInput
@@ -37,6 +39,14 @@ export default function RegisterUser() {
 					// defaultValue={text}
 				/>
 				<Text style={styles.textUser}>Telefone</Text>
+				<TextInput
+					style={styles.textInput}
+					placeholder='Ex. 85 99999-0000'
+					secureTextEntry={true}
+					// onChangeText={(text) => setText(text)}
+					// defaultValue={text}
+				/>
+				<Text style={styles.textUser}>Senha</Text>
 				<TextInput
 					style={styles.textInput}
 					placeholder='Ex. 85 99999-0000'
@@ -66,7 +76,7 @@ const styles = StyleSheet.create({
 	registerArea: {
 		alignItems: 'center',
 		justifyContent: 'space-evenly',
-		flex: 9,
+		flex: 11,
 		flexDirection: 'column',
 		direction: 'rtl',
 		flexWrap: 'nowrap'

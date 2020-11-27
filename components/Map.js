@@ -8,37 +8,18 @@ import Geolocation from 'react-native-geolocation-service';
 export default function Map() {
 	const [position, setPosition] = useState({});
 
-	const regionFrom = (lat, lon, distance) => {
-		distance = distance / 2;
-		const circumference = 40075;
-		const oneDegreeOfLatitudeInMeters = 111.32 * 1000;
-		const angularDistance = distance / circumference;
-
-		const latitudeDelta = distance / oneDegreeOfLatitudeInMeters;
-		const longitudeDelta = Math.abs(
-			Math.atan2(
-				Math.sin(angularDistance) * Math.cos(lat),
-				Math.cos(angularDistance) - Math.sin(lat) * Math.sin(lat)
-			)
-		);
-
-		return (result = {
-			latitude: lat,
-			longitude: lon,
-			latitudeDelta,
-			longitudeDelta
-		});
-	};
-
-	const getLocationPermission = () => {
+	function getLocationPermission() {
 		request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
 			.then((result) => {
 				if (result === RESULTS.GRANTED) {
 					Geolocation.getCurrentPosition(
 						(pos) => {
-							setPosition(
-								regionFrom(pos.coords.latitude, pos.coords.longitude, 5)
-							);
+							setPosition({
+								latitude: pos.coords.latitude,
+								longitude: pos.coords.longitude,
+								latitudeDelta: 0.015,
+								longitudeDelta: 0.0121
+							});
 						},
 						(error) => {
 							console.log(error);
@@ -52,7 +33,7 @@ export default function Map() {
 			.catch((err) => {
 				console.log(err);
 			});
-	};
+	}
 
 	useEffect(() => {
 		getLocationPermission();
@@ -74,27 +55,9 @@ export default function Map() {
 				<Marker
 					coordinate={position}
 					title={'Marcador'}
-					description={'Testando o marcador no mapa'}
+					description={'Você está aqui'}
 				/>
 			</MapView>
-			<View style={styles.positonBox}>
-				<Text style={styles.positonBoxTitle}>Sua Localização</Text>
-				<View style={styles.positonBoxLatLon}>
-					<Text style={{ fontSize: 18 }}>Lat.</Text>
-					<Text style={{ fontSize: 18 }}>{position.latitude}</Text>
-				</View>
-				<View style={styles.positonBoxLatLon}>
-					<Text style={{ fontSize: 18 }}>Lon.</Text>
-					<Text style={{ fontSize: 18 }}>{position.longitude}</Text>
-				</View>
-			</View>
-			<TouchableOpacity style={styles.locationButton} onPress={() => {}}>
-				<Icon name='my-location' color={'#fff'} size={30} />
-			</TouchableOpacity>
-			<View style={styles.logo}>
-				<Text style={styles.logoText}>Samurai</Text>
-				<Text style={[styles.logoText, { color: '#e74c3c' }]}>Map</Text>
-			</View>
 		</View>
 	);
 }
