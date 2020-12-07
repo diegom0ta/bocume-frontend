@@ -32,12 +32,24 @@ export default function Login({ navigation }) {
 
 	function _handleLogin() {
 		authUser(username, password);
+
 		if (dataResponse.success) {
-			() => navigation.navigate('Map');
+			navigation.navigate('Map');
 		} else {
-			() => alert('Usuário e/ou senha incorreto(s)!');
+			alert('Usuário e/ou senha incorreto(s)!');
 		}
 		console.log('data', dataResponse);
+	}
+
+	const arrLogin = ['motadiego98@gmail.com', 'projetogrowing@gmail.com'];
+
+	function login(username) {
+		const result = arrLogin.find((un) => username === un);
+		if (username !== result) {
+			alert('Usuário e/ou senha incorreto(s)!');
+		} else {
+			navigation.navigate('Map');
+		}
 	}
 
 	return (
@@ -65,7 +77,11 @@ export default function Login({ navigation }) {
 				/>
 			</View>
 			<View style={styles.buttonArea}>
-				<Button onPress={() => _handleLogin()} title='Entrar' color='#ffb300' />
+				<Button
+					onPress={() => login(username, password)}
+					title='Entrar'
+					color='#ffb300'
+				/>
 				<Button
 					onPress={() => navigation.navigate('RegisterUser')}
 					title='Ainda não é cliente? Cadastre-se'
@@ -95,11 +111,12 @@ const styles = StyleSheet.create({
 		flexWrap: 'nowrap'
 	},
 	textInput: {
+		borderRadius: 20,
+		borderWidth: 3,
 		width: 250,
 		height: 50,
 		backgroundColor: 'white',
-		borderColor: '#ffb300',
-		borderWidth: 1
+		borderColor: '#ffb300'
 	},
 	buttonArea: {
 		margin: 20,

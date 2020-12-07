@@ -58,7 +58,7 @@ export default function RegisterUser() {
 			<View style={styles.buttonArea}>
 				<Button
 					onPress={() => {
-						alert('You tapped the button!');
+						alert('Cadastrado com sucesso');
 					}}
 					title='Cadastrar'
 					color='#ffb300'
@@ -82,6 +82,8 @@ const styles = StyleSheet.create({
 		flexWrap: 'nowrap'
 	},
 	textInput: {
+		borderRadius: 20,
+		borderWidth: 3,
 		width: 250,
 		height: 50,
 		backgroundColor: 'white',

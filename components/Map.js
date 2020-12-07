@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	Alert,
+	Image,
+	SafeAreaView,
+	ScrollView
+} from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
+import { ListItem, Avatar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Geolocation from 'react-native-geolocation-service';
 
-export default function Map() {
+export default function Map({ navigation }) {
 	const [position, setPosition] = useState({});
 
 	function getLocationPermission() {
@@ -35,83 +44,106 @@ export default function Map() {
 			});
 	}
 
+	const avatar = require('../assets/logo.png');
+
 	useEffect(() => {
 		getLocationPermission();
 	}, []);
 
 	return (
-		<View style={styles.container}>
-			<MapView
-				style={styles.map}
-				region={position}
-				onPress={(e) =>
-					setPosition({
-						...position,
-						latitude: e.nativeEvent.coordinate.latitude,
-						longitude: e.nativeEvent.coordinate.longitude
-					})
-				}
-			>
-				<Marker
-					coordinate={position}
-					title={'Marcador'}
-					description={'Você está aqui'}
-				/>
-			</MapView>
-		</View>
+		<SafeAreaView style={styles.container}>
+			<View style={styles.mapContainer}>
+				<MapView
+					style={styles.map}
+					region={position}
+					onPress={(e) =>
+						setPosition({
+							...position,
+							latitude: e.nativeEvent.coordinate.latitude,
+							longitude: e.nativeEvent.coordinate.longitude
+						})
+					}
+				>
+					<Marker
+						coordinate={position}
+						title={'Marcador'}
+						description={'Você está aqui'}
+					/>
+				</MapView>
+			</View>
+			<ScrollView>
+				<ListItem onPress={() => navigation.navigate('Marmitaria')}>
+					<Avatar rounded title='TT' />
+					<ListItem.Content>
+						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
+						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+				<ListItem>
+					<Avatar rounded title='TT' />
+					<ListItem.Content>
+						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
+						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+				<ListItem>
+					<Avatar rounded title='TT' />
+					<ListItem.Content>
+						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
+						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+				<ListItem>
+					<Avatar rounded title='TT' />
+					<ListItem.Content>
+						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
+						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+				<ListItem>
+					<Avatar rounded title='TT' />
+					<ListItem.Content>
+						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
+						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+				<ListItem>
+					<Avatar rounded title='TT' />
+					<ListItem.Content>
+						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
+						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+				<ListItem>
+					<Avatar rounded title='TT' />
+					<ListItem.Content>
+						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
+						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+				<ListItem>
+					<Avatar rounded title='TT' />
+					<ListItem.Content>
+						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
+						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
+					</ListItem.Content>
+				</ListItem>
+			</ScrollView>
+		</SafeAreaView>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
+		height: 828,
+		backgroundColor: '#7a0c0c'
+	},
+	mapContainer: {
 		position: 'relative',
 		height: 500
 	},
 	map: {
 		height: '100%',
 		width: '100%'
-	},
-	logo: {
-		backgroundColor: '#fff',
-		borderRadius: 15,
-		paddingHorizontal: 15,
-		elevation: 5,
-		marginTop: -730,
-		alignSelf: 'center',
-		marginRight: 10,
-		flexDirection: 'row'
-	},
-	logoText: {
-		fontWeight: 'bold',
-		fontSize: 22
-	},
-	positonBox: {
-		backgroundColor: '#fff',
-		borderRadius: 20,
-		opacity: 0.75,
-		marginTop: -170,
-		marginHorizontal: 40,
-		padding: 25,
-		shadowColor: '#000',
-		elevation: 5
-	},
-	positonBoxTitle: {
-		textAlign: 'center',
-		fontSize: 22,
-		fontWeight: 'bold',
-		color: '#e74c3c'
-	},
-	positonBoxLatLon: { flexDirection: 'row', justifyContent: 'space-between' },
-	locationButton: {
-		backgroundColor: '#e74c3c',
-		borderRadius: 150,
-		marginTop: -25,
-		width: 50,
-		height: 50,
-		alignSelf: 'center',
-		justifyContent: 'center',
-		alignItems: 'center',
-		shadowColor: '#000',
-		elevation: 8
 	}
 });
