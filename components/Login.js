@@ -34,7 +34,7 @@ export default function Login({ navigation }) {
 		authUser(username, password);
 
 		if (dataResponse.success) {
-			navigation.navigate('Map');
+			navigation.navigate('Localizar');
 		} else {
 			alert('Usuário e/ou senha incorreto(s)!');
 		}
@@ -48,15 +48,12 @@ export default function Login({ navigation }) {
 		if (username !== result) {
 			alert('Usuário e/ou senha incorreto(s)!');
 		} else {
-			navigation.navigate('Map');
+			navigation.navigate('Localizar');
 		}
 	}
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<View style={styles.header}>
-				<Text style={styles.textLogin}>Já é nosso usuário?</Text>
-			</View>
 			<View style={styles.logoArea}>
 				<Image
 					source={require('../assets/logo.png')}
@@ -98,6 +95,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#7a0c0c'
 	},
 	logoArea: {
+		marginTop: 50,
 		justifyContent: 'center',
 		flex: 1,
 		flexDirection: 'row'
@@ -119,18 +117,9 @@ const styles = StyleSheet.create({
 		borderColor: '#ffb300'
 	},
 	buttonArea: {
-		margin: 20,
+		margin: 50,
 		justifyContent: 'center',
 		flex: 2,
 		flexDirection: 'column'
-	},
-	textLogin: {
-		color: 'white',
-		fontSize: 20
-	},
-	header: {
-		justifyContent: 'center',
-		flex: 1,
-		flexDirection: 'row'
 	}
 });

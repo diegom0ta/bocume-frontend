@@ -9,13 +9,19 @@ import {
 } from 'react-native';
 import { Card } from 'react-native-elements';
 
-export default function Marmitaria({ navigation }) {
+export default function Marmitaria({ route, navigation }) {
+	const { itemId, itemName, itemDist, itemDesc, itemAddr } = route.params;
 	return (
 		<SafeAreaView style={styles.container}>
 			<View style={styles.logoArea}>
 				<Image
-					source={require('../assets/marmitaria.png')}
-					style={{ width: 300, height: 150, resizeMode: 'stretch' }}
+					source={require('../assets/marmitaria.jpg')}
+					style={{
+						borderRadius: 20,
+						width: 200,
+						height: 200,
+						resizeMode: 'stretch'
+					}}
 				/>
 			</View>
 			<View style={styles.infoArea}>
@@ -27,14 +33,9 @@ export default function Marmitaria({ navigation }) {
 						height: 300
 					}}
 				>
-					<Card.Title style={{ fontSize: 22 }}>D'Casa Marmitaria</Card.Title>
-					<Text style={styles.textArea}>
-						Marmitaria especializada em comida caseira. Entregamos em domicílio
-						e não cobramos taxa de entrega.
-					</Text>
-					<Text style={styles.textArea}>
-						Rua Corornel Linhares, 1278 Bairro: Aldeota
-					</Text>
+					<Card.Title style={{ fontSize: 22 }}>{itemName}</Card.Title>
+					<Text style={styles.textArea}>{itemDesc}</Text>
+					<Text style={styles.textArea}>{itemAddr}</Text>
 				</Card>
 			</View>
 			<View style={styles.buttonArea}>

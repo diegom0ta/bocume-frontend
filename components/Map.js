@@ -4,15 +4,14 @@ import {
 	Text,
 	View,
 	Alert,
-	Image,
 	SafeAreaView,
-	ScrollView
+	FlatList,
+	TouchableOpacity
 } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { ListItem, Avatar } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import Geolocation from 'react-native-geolocation-service';
+import DATA from '../api/data';
 
 export default function Map({ navigation }) {
 	const [position, setPosition] = useState({});
@@ -44,7 +43,27 @@ export default function Map({ navigation }) {
 			});
 	}
 
-	const avatar = require('../assets/logo.png');
+	const Item = ({ name, distance, id, desc, addr }) => (
+		<TouchableOpacity
+			onPress={() => {
+				navigation.navigate('Marmitaria', {
+					itemId: id,
+					itemName: name,
+					itemDist: distance,
+					itemDesc: desc,
+					itemAddr: addr
+				});
+			}}
+			style={styles.item}
+		>
+			<Text style={styles.itemText}>{name}</Text>
+			<Text style={styles.itemText}>{distance}</Text>
+		</TouchableOpacity>
+	);
+
+	const renderItem = ({ item }) => (
+		<Item name={item.name} distance={item.distance} />
+	);
 
 	useEffect(() => {
 		getLocationPermission();
@@ -71,64 +90,11 @@ export default function Map({ navigation }) {
 					/>
 				</MapView>
 			</View>
-			<ScrollView>
-				<ListItem onPress={() => navigation.navigate('Marmitaria')}>
-					<Avatar rounded title='TT' />
-					<ListItem.Content>
-						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
-						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
-					</ListItem.Content>
-				</ListItem>
-				<ListItem>
-					<Avatar rounded title='TT' />
-					<ListItem.Content>
-						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
-						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
-					</ListItem.Content>
-				</ListItem>
-				<ListItem>
-					<Avatar rounded title='TT' />
-					<ListItem.Content>
-						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
-						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
-					</ListItem.Content>
-				</ListItem>
-				<ListItem>
-					<Avatar rounded title='TT' />
-					<ListItem.Content>
-						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
-						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
-					</ListItem.Content>
-				</ListItem>
-				<ListItem>
-					<Avatar rounded title='TT' />
-					<ListItem.Content>
-						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
-						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
-					</ListItem.Content>
-				</ListItem>
-				<ListItem>
-					<Avatar rounded title='TT' />
-					<ListItem.Content>
-						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
-						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
-					</ListItem.Content>
-				</ListItem>
-				<ListItem>
-					<Avatar rounded title='TT' />
-					<ListItem.Content>
-						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
-						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
-					</ListItem.Content>
-				</ListItem>
-				<ListItem>
-					<Avatar rounded title='TT' />
-					<ListItem.Content>
-						<ListItem.Title>Marmitaria XYZ</ListItem.Title>
-						<ListItem.Subtitle>R$ 13,00</ListItem.Subtitle>
-					</ListItem.Content>
-				</ListItem>
-			</ScrollView>
+			<FlatList
+				data={DATA}
+				renderItem={renderItem}
+				keyExtractor={(item) => item.id}
+			/>
 		</SafeAreaView>
 	);
 }
@@ -145,5 +111,13 @@ const styles = StyleSheet.create({
 	map: {
 		height: '100%',
 		width: '100%'
+	},
+	item: {
+		margin: 50
+	},
+	itemText: {
+		color: '#ffffff',
+		fontWeight: 'bold',
+		fontSize: 18
 	}
 });

@@ -17,7 +17,7 @@ export default function App() {
 				<Stack.Screen name='Home' component={Home} />
 				<Stack.Screen name='Login' component={Login} />
 				<Stack.Screen name='RegisterUser' component={RegisterUser} />
-				<Stack.Screen name='Map' component={Map} />
+				<Stack.Screen name='Localizar' component={Map} />
 				<Stack.Screen name='Marmitaria' component={Marmitaria} />
 			</Stack.Navigator>
 		</NavigationContainer>
