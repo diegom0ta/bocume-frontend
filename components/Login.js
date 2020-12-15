@@ -80,7 +80,7 @@ export default function Login({ navigation }) {
 					color='#ffb300'
 				/>
 				<Button
-					onPress={() => navigation.navigate('RegisterUser')}
+					onPress={() => navigation.navigate('Registrar')}
 					title='Ainda não é cliente? Cadastre-se'
 					color='#ffb300'
 				/>

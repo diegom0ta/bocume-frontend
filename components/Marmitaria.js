@@ -34,13 +34,18 @@ export default function Marmitaria({ route, navigation }) {
 					}}
 				>
 					<Card.Title style={{ fontSize: 22 }}>{itemName}</Card.Title>
-					<Text style={styles.textArea}>{itemDesc}</Text>
-					<Text style={styles.textArea}>{itemAddr}</Text>
+					<Text style={styles.textArea}>
+						Marmitaria especializada em comida caseira. Entregamos em domicílio
+						e não cobramos taxa de entrega.
+					</Text>
+					<Text style={styles.textArea}>
+						Rua Costa Barros, 1987, Bairro: Aldeota
+					</Text>
 				</Card>
 			</View>
 			<View style={styles.buttonArea}>
 				<Button
-					onPress={() => navigation.navigate('')}
+					onPress={() => navigation.navigate('Pedido')}
 					title='Pedir'
 					color='#ffb300'
 				/>

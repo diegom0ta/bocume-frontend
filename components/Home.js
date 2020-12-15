@@ -22,7 +22,7 @@ export default function Home({ navigation }) {
 			</View>
 			<View style={styles.buttonArea}>
 				<Button
-					onPress={() => navigation.navigate('Login')}
+					onPress={() => navigation.navigate('Entrar')}
 					title='Começar'
 					color='#ffb300'
 				/>

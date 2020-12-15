@@ -14,7 +14,12 @@ import Geolocation from 'react-native-geolocation-service';
 import DATA from '../api/data';
 
 export default function Map({ navigation }) {
-	const [position, setPosition] = useState({});
+	const [position, setPosition] = useState({
+		latitude: -3.74772,
+		longitude: -38.49666,
+		latitudeDelta: 0.015,
+		longitudeDelta: 0.0121
+	});
 
 	function getLocationPermission() {
 		request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
@@ -22,12 +27,7 @@ export default function Map({ navigation }) {
 				if (result === RESULTS.GRANTED) {
 					Geolocation.getCurrentPosition(
 						(pos) => {
-							setPosition({
-								latitude: pos.coords.latitude,
-								longitude: pos.coords.longitude,
-								latitudeDelta: 0.015,
-								longitudeDelta: 0.0121
-							});
+							setPosition({});
 						},
 						(error) => {
 							console.log(error);
@@ -66,7 +66,7 @@ export default function Map({ navigation }) {
 	);
 
 	useEffect(() => {
-		getLocationPermission();
+		// getLocationPermission();
 	}, []);
 
 	return (
